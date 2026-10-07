@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block body %}
+<h1>确认选择相似岗位</h1>
+<p>你正准备选择：<b>{{ job.company }} · {{ job.title }}</b>（{{ job.location }}）。同招聘品牌已有下列已选岗位：</p>
+{% for conflict, other in related %}<section class="card" style="margin-bottom:12px;padding:16px">
+ <p><b>{{ '相同 JD / 职位编号' if conflict.kind=='exact' else '同名且 JD 高度相似' }}</b> · {{ conflict.reason }}</p>
+ <p><a href="{{ url_for('job',job_id=other.job_id,return_to=url_for('selected')) }}">{{ other.company }} · {{ other.title }}</a>（{{ other.location }}）</p>
+ <details><summary>对照两份 JD</summary><div class="row"><div><b>待选择</b><pre>{{ job.jd_text }}</pre></div><div><b>已选</b><pre>{{ other.jd_text }}</pre></div></div></details>
+</section>{% endfor %}
+<p class="muted">若是两个独立的招聘需求，可以保留两条；本操作只记录选择意向，不会投递。</p>
+<form method="post" action="{{ url_for('do_decide',job_id=job.job_id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="decision" value="apply"><input type="hidden" name="confirm_duplicate" value="yes"><input type="hidden" name="return_to" value="{{ return_to }}"><input type="hidden" name="note" value="{{ note }}"><button class="primary">确认仍选择这条</button> <a href="{{ return_to }}">返回，不选择</a></form>
+{% endblock %}

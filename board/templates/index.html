@@ -1,0 +1,34 @@
+{% extends "base.html" %}{% block body %}
+{% macro ring(score) %}{% set r = 24 %}{% set c = 2 * 3.14159 * r %}
+<svg class="score-ring" viewBox="0 0 56 56" aria-label="匹配分 {{ score }}"><circle cx="28" cy="28" r="{{ r }}" fill="none" stroke="var(--line)" stroke-width="4"/>
+<circle cx="28" cy="28" r="{{ r }}" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-dasharray="{{ '%.1f' % (c * score / 100) }} {{ '%.1f' % c }}" transform="rotate(-90 28 28)"/>
+<text x="28" y="33" text-anchor="middle">{{ score }}</text></svg>{% endmacro %}
+<h1>{{ '已选待投递' if selected else '待挑选' }} <span class="faint">{{ total }}</span></h1>
+{% if selected %}<p><a href="{{ url_for('selected_duplicates') }}">查看已选岗位的疑似重复</a></p>{% endif %}
+<p class="muted">{% if selected %}已记录你的投递意向；简历与投递流程尚未执行。{% else %}已完成 JD 分析与匹配评分，等你决定是否投递；“选择投递”只记录意向，不会发送申请。{% endif %}</p>
+{% include "filters.html" %}
+{% if not rows %}<div class="empty-state">{% if total %}<h2>没有符合条件的岗位</h2><p>试试减少筛选条件，或更换搜索词。</p><a href="{{ base }}">清除全部筛选</a>{% else %}<h2>{{ '暂无已选岗位' if selected else '暂无待挑选岗位' }}</h2><p>{% if not selected %}跑 <code>pipeline.py resume</code> 回收任务包，或去内推入口贴一条 JD。{% endif %}</p>{% endif %}</div>{% else %}
+<div class="card">
+{% for r in rows %}<div class="row">
+ <div>{{ ring(r.soft_score) }}</div>
+ <div>
+  <div class="title"><a href="{{ url_for('job',job_id=r.job_id,return_to=list_url) }}">{{ r.title }}</a></div>
+  <div class="company">{{ r.company }}</div>
+  <div class="meta">{{ r.region }} · {{ source_names.get(r.source,r.source) }}{% if r.location %} · {{ r.location }}{% endif %}</div>
+  <div class="chips job-tags">{% for role in r.roles %}<span class="chip plain">{{ role_names[role] }}</span>{% endfor %}{% for stage in r.stages if stage!='unspecified' %}<span class="chip plain">{{ stage_names[stage] }}</span>{% endfor %}</div>
+  <div class="summary">{{ r.summary }}</div>
+  <div class="chips">
+   {% if r.fixable %}<span class="chip plain">缺口可用文案弥补</span>{% endif %}
+   {% for h in r.hard_fail_reasons %}<span class="chip hard">{{ h }}</span>{% endfor %}{% for f in r.soft_flags %}<span class="chip plain">{{ f }}</span>{% endfor %}
+   {% for g in r.top_gaps %}{% set kind = g.split('（')[-1].rstrip('）') %}<span class="chip {{ kind }}">{{ g }}</span>{% endfor %}
+  </div>
+ </div>
+ {% if not selected %}<div class="actions">
+  <form class="inline" method="post" action="/decide/{{ r.job_id }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="return_to" value="{{ list_url }}"><input type="hidden" name="decision" value="apply"><button class="primary">选择投递</button></form>
+  <form class="inline" method="post" action="/decide/{{ r.job_id }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="return_to" value="{{ list_url }}"><input type="hidden" name="decision" value="later"><button>稍后</button></form>
+  <form class="inline" method="post" action="/decide/{{ r.job_id }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="return_to" value="{{ list_url }}"><input type="hidden" name="decision" value="skip"><button>放弃</button></form>
+ </div>{% endif %}
+</div>{% endfor %}
+</div>{% endif %}
+{% include "pagination.html" %}
+{% endblock %}

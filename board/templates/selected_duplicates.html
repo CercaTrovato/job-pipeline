@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block body %}
+<p class="faint"><a href="{{ url_for('selected') }}">← 返回已选待投递</a></p>
+<h1>已选岗位重复审查 <span class="faint">{{ pairs|length }}</span></h1>
+<p class="muted">此处只列同招聘品牌的相同 JD / 职位编号，或同城同轨道同标题且 JD 高度相似的岗位。现有选择不会自动改变；同文不同岗位编号也可能是独立招聘需求，请对照原链接决定。</p>
+{% for p in pairs %}<section class="card" style="margin-bottom:16px;padding:18px">
+ <p><b>{{ 'JD / 职位编号相同' if p.kind=='exact' else '高度相似，待核对' }}</b> · {{ p.reason }} · 相似度 {{ '%.1f' % (p.similarity * 100) }}%</p>
+ <div class="row"><div><a href="{{ url_for('job',job_id=p.left.job_id,return_to=url_for('selected')) }}">{{ p.left.company }} · {{ p.left.title }}</a><div class="muted">{{ p.left.location }} · {{ p.left.source }} · {{ p.left.job_id }}</div></div>
+ <div><a href="{{ url_for('job',job_id=p.right.job_id,return_to=url_for('selected')) }}">{{ p.right.company }} · {{ p.right.title }}</a><div class="muted">{{ p.right.location }} · {{ p.right.source }} · {{ p.right.job_id }}</div></div></div>
+ {% if p.review and p.review.action=='keep_both' %}<p class="muted">已人工确认保留两条：{{ p.review.created_at }}</p>{% endif %}
+ <form class="inline" method="post" action="{{ url_for('selected_duplicates_review') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="job_id" value="{{ p.left.job_id }}"><input type="hidden" name="related_id" value="{{ p.right.job_id }}"><input type="hidden" name="action" value="keep_both"><button>保留两条</button></form>
+ <form class="inline" method="post" action="{{ url_for('selected_duplicates_review') }}" onsubmit="return confirm('将左侧岗位移出已选并标为重复帖？')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="job_id" value="{{ p.left.job_id }}"><input type="hidden" name="related_id" value="{{ p.right.job_id }}"><input type="hidden" name="action" value="mark_duplicate"><button>移出左侧，保留右侧</button></form>
+ <form class="inline" method="post" action="{{ url_for('selected_duplicates_review') }}" onsubmit="return confirm('将右侧岗位移出已选并标为重复帖？')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="job_id" value="{{ p.right.job_id }}"><input type="hidden" name="related_id" value="{{ p.left.job_id }}"><input type="hidden" name="action" value="mark_duplicate"><button>移出右侧，保留左侧</button></form>
+</section>{% else %}<div class="empty-state"><h2>没有同品牌的疑似重复已选岗位</h2></div>{% endfor %}
+{% endblock %}

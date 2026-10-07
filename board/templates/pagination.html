@@ -1,0 +1,5 @@
+{% if pages>1 %}<nav class="pagination" aria-label="岗位列表分页">
+{% if previous %}<a class="btn" href="{{ previous }}">上一页</a>{% else %}<span class="btn disabled">上一页</span>{% endif %}
+<span>第 {{ page_number }} / {{ pages }} 页</span>
+{% if next_page %}<a class="btn" href="{{ next_page }}">下一页</a>{% else %}<span class="btn disabled">下一页</span>{% endif %}
+</nav>{% endif %}

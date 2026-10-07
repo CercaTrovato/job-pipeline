@@ -1,0 +1,37 @@
+{% extends "base.html" %}{% block body %}
+<p class="faint"><a href="{{ return_to }}">← {{ return_label }}</a></p>
+<h1>{{ d.job.title }} <span class="muted" style="font-weight:400">· {{ d.job.company }}</span></h1>
+<dl class="kv">
+ <dt>状态</dt><dd>{{ d.job.status }} · {{ d.job.region }} · {{ d.job.source }}</dd>
+ <dt>链接</dt><dd><a href="{{ d.job.url }}" target="_blank">{{ d.job.url }}</a></dd>
+ <dt>匹配分</dt><dd><b>{{ d.soft_score }}</b>{% for h in d.hard_fail_reasons %} <span class="chip hard">{{ h }}</span>{% endfor %}{% for f in d.soft_flags %} <span class="chip plain">{{ f }}</span>{% endfor %}</dd>
+</dl>
+{% if d.duplicate %}<h2>重复帖去向</h2><p class="muted">{{ d.duplicate.reason }}</p>
+{% if d.duplicate.representative %}<p>代表岗位：<a href="{{ url_for('job',job_id=d.duplicate.representative.job_id,return_to=return_to) }}">{{ d.duplicate.representative.company }} · {{ d.duplicate.representative.title }}</a>（{{ d.duplicate.representative.status_label }}）</p>
+{% if d.duplicate.representative.company != d.job.company %}<p class="muted">此帖与其他公司名下的 JD 相同；公司归属须以招聘官网或原帖进一步核实。</p>{% endif %}
+{% else %}<p class="muted">代表帖记录未找到，需人工核查。</p>{% endif %}{% endif %}
+{% if d.breakdown %}<h2>评分明细</h2>
+<p class="muted">每条需求按结论记分（strong / exceeds = 1，partial = 0.5，no_evidence = 0.15，gap = 0），按需求等级分组取平均，再按权重（高 0.6 · 中 0.3 · 低 0.1，缺组时按比例分摊）加总；硬条件不合封顶 {{ d.breakdown.cap }}。到岗条件类需求由规则判定。</p>
+<table class="breakdown"><tr><th>需求等级</th><th>条数</th><th>结论</th><th>组平均</th><th>权重</th><th>贡献</th></tr>
+{% for r in d.breakdown.rows %}<tr><td class="req-level-{{ r.level }}">{{ r.level_name }}</td><td>{{ r.count }}</td>
+<td class="faint">{% for it in r["items"] %}{{ it.req_id }} {{ it.verdict }}{% if not loop.last %} · {% endif %}{% endfor %}</td>
+<td>{{ r.mean }}</td><td>{{ r.weight }}</td><td><b>{{ r.contribution }}</b></td></tr>{% endfor %}
+<tr><td colspan="5" class="muted">合计{% if d.breakdown.capped %}（硬条件不合，{{ d.breakdown.raw }} 封顶为 {{ d.breakdown.cap }}）{% endif %}</td><td><b>{{ d.breakdown.score }}</b></td></tr>
+</table>{% endif %}
+{% if d.match %}<h2>评审理由</h2><p class="muted">{{ d.match.rationale }}</p>
+{% if d.quote_warnings %}<p class="muted">模型引文与 JD 原文不一致（{{ d.quote_warnings|length }} 条：{{ d.quote_warnings|join('、') }}），请对照下方 JD 全文核对。</p>{% endif %}
+<h2>逐条需求</h2>
+<table><tr><th>需求</th><th>等级</th><th>证据</th><th>结论</th><th>说明</th></tr>
+{% for it in d.match["items"] %}{% set req = req_by_id.get(it.req_id) %}
+<tr><td class="req-level-{{ req.level if req else 'low' }}">{% if req %}{{ req.requirement }}<br><span class="faint">“{{ req.quote }}”</span>{% else %}{{ it.req_id }} <span class="faint">(需求缺失)</span>{% endif %}</td>
+<td class="faint">{{ req.level if req else '' }}</td>
+<td><span class="grade grade-{{ it.evidence_grade }}">{{ it.evidence_grade }}</span> <span class="faint">{{ it.fact_ids|join(", ") }}</span></td>
+<td>{{ it.verdict }}{% if it.gap_type %} <span class="chip {{ it.gap_type }}">{{ it.gap_type }}</span>{% endif %}</td>
+<td class="muted">{{ it.note }}</td></tr>{% endfor %}</table>{% endif %}
+{% if d.analysis %}<h2>关键词</h2><div class="chips">{% for k in d.analysis.keywords.must %}<span class="chip">{{ k }}</span>{% endfor %}{% for k in d.analysis.keywords.core %}<span class="chip plain">{{ k }}</span>{% endfor %}{% for k in d.analysis.keywords.bonus %}<span class="chip plain">{{ k }}</span>{% endfor %}</div>{% endif %}
+<h2>JD 全文</h2><pre>{{ d.job.jd_text }}</pre>
+{% if d.job.status == "pending_review" %}
+<form method="post" action="/decide/{{ d.job.job_id }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="return_to" value="{{ return_to }}"><label>备注（可空）</label><input name="note">
+<p class="muted">选择投递只记录你的决定，不会自动生成简历、发送消息或提交申请。</p>
+<div style="margin-top:10px;display:flex;gap:8px"><button class="primary" name="decision" value="apply">选择投递</button><button name="decision" value="later">稍后</button><button name="decision" value="skip">放弃</button></div></form>{% endif %}
+{% endblock %}

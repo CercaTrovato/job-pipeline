@@ -1,0 +1,22 @@
+<section class="filter-panel" aria-label="岗位搜索与筛选">
+<form method="get" action="{{ base }}">
+ <div class="search-fields">
+  <div><label for="job-search">搜索岗位</label><input id="job-search" type="search" name="q" value="{{ filters.q }}" placeholder="公司、岗位、地点或 JD 关键词" autocomplete="off"></div>
+  <div><label for="company-filter">公司</label><input id="company-filter" name="company" value="{{ filters.company }}" list="company-options" placeholder="输入公司名，或选择候选" autocomplete="off">
+   <datalist id="company-options">{% for name, count in companies %}<option value="{{ name }}">{{ count }} 个岗位</option>{% endfor %}</datalist></div>
+ </div>
+ <div class="select-fields">
+ {% for key, label in [('region','地区'), ('source','来源'), ('stage','招聘类型')] %}
+  <div><label for="filter-{{ key }}">{{ label }}</label><select id="filter-{{ key }}" name="{{ key }}"><option value="">全部{{ label }}</option>{% for value, name, count in facets[key] %}<option value="{{ value }}"{% if filters[key]==value %} selected{% endif %}>{{ name }} · {{ count }}</option>{% endfor %}</select></div>
+ {% endfor %}
+ {% if base in ['/prescreened','/queue'] %}<div><label for="filter-status">{{ '队列状态' if base=='/queue' else '淘汰类型' }}</label><select id="filter-status" name="status"><option value="">全部{{ '队列状态' if base=='/queue' else '淘汰类型' }}</option>{% for value,name,count in facets.status %}<option value="{{ value }}"{% if filters.status==value %} selected{% endif %}>{{ name }} · {{ count }}</option>{% endfor %}</select></div>{% endif %}
+  <div><label for="filter-sort">排序</label><select id="filter-sort" name="sort">{% if base=='/queue' %}<option value="queue"{% if filters.sort=='queue' %} selected{% endif %}>预计处理顺序</option>{% endif %}{% for value,name in [('score','粗筛分从高到低' if base in ['/prescreened','/queue'] else '匹配分从高到低'),('newest','最新入库优先'),('company','按公司排列')] %}<option value="{{ value }}"{% if filters.sort==value %} selected{% endif %}>{{ name }}</option>{% endfor %}</select></div>
+ </div>
+ <fieldset class="role-filters"><legend>岗位类型 <span class="faint">可多选</span></legend><div class="role-options">
+ {% for value,name,count in role_options %}<label class="role-option"><input type="checkbox" name="role" value="{{ value }}"{% if value in filters.roles %} checked{% endif %}><span>{{ name }} <small>{{ count }}</small></span></label>{% endfor %}
+ </div></fieldset>
+ <div class="filter-bottom"><p>同类多选满足其一；不同条件同时满足。类型按标题标注，仅供浏览。</p><button class="primary" type="submit">搜索 / 筛选</button></div>
+</form>
+</section>
+<div class="results-bar" role="status"><span>显示 <strong>{{ matched }}</strong> / {{ total }} 个岗位{% if pages>1 %} · 每页 30 条{% endif %}</span>{% if active_filters %}<a href="{{ base }}">清除全部</a>{% endif %}</div>
+{% if active_filters %}<div class="active-filters">{% for label,href in active_filters %}<a class="chip" href="{{ href }}" aria-label="移除筛选 {{ label }}">{{ label }} <span aria-hidden="true">×</span></a>{% endfor %}</div>{% endif %}

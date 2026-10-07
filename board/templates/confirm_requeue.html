@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block body %}
+<h1>已有同品牌同 JD 的已选岗位</h1>
+<p><b>{{ job.company }} · {{ job.title }}</b>与下列已选岗位高度重合，默认无需再次入队。</p>
+{% for conflict, other in related %}<p><a href="{{ url_for('job',job_id=other.job_id,return_to=url_for('selected')) }}">{{ other.company }} · {{ other.title }}</a>（{{ other.location }}） · {{ conflict.reason }}</p>{% endfor %}
+{% if allow_override %}<p class="muted">两条官网岗位有不同的职位编号。如已核实属于独立招聘需求，可明确保留两条。</p>
+<form method="post" action="{{ url_for('requeue',job_id=job.job_id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="confirm_distinct" value="yes"><input type="hidden" name="return_to" value="{{ return_to }}"><button class="primary">确认独立岗位，仍然入队</button></form>
+{% else %}<p class="muted">目前没有可核实的不同官网职位编号；请先对照来源，避免重复消耗分析任务包。</p>{% endif %}
+<p><a href="{{ return_to }}">返回原列表</a></p>
+{% endblock %}

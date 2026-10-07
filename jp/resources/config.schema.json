@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/job-pipeline/config.v1.schema.json",
+  "title": "Job Pipeline workspace configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "llm", "budget", "sources", "fetch", "prescore", "browser"],
+  "properties": {
+    "version": {"const": 1},
+    "llm": {
+      "type": "object", "additionalProperties": false,
+      "required": ["backend", "model", "protocol", "base_url", "credential", "concurrency", "timeout_sec", "reasoning_effort"],
+      "properties": {
+        "backend": {"enum": ["manual", "claude", "codex", "api"]},
+        "model": {"type": "string"}, "protocol": {"enum": ["responses", "chat_completions", "anthropic"]},
+        "base_url": {"type": "string"},
+        "credential": {"type": "object", "additionalProperties": false, "required": ["kind", "name"], "properties": {"kind": {"enum": ["env", "keyring", "session"]}, "name": {"type": "string", "minLength": 1}}},
+        "concurrency": {"type": "integer", "minimum": 1, "maximum": 8}, "timeout_sec": {"type": "integer", "minimum": 1, "maximum": 3600},
+        "reasoning_effort": {"enum": ["low", "medium", "high", "xhigh"]}
+      },
+      "allOf": [
+        {"if": {"properties": {"backend": {"const": "codex"}}, "required": ["backend"]}, "then": {"properties": {"model": {"minLength": 1}}}},
+        {"if": {"properties": {"backend": {"const": "api"}}, "required": ["backend"]}, "then": {"properties": {"model": {"minLength": 1}, "base_url": {"minLength": 1}}}}
+      ]
+    },
+    "budget": {"type": "object", "additionalProperties": false, "required": ["max_jobs"], "properties": {"max_jobs": {"type": "integer", "minimum": 1, "maximum": 100}}},
+    "sources": {"type": "object", "additionalProperties": false, "required": ["CN", "HK"], "properties": {"CN": {"type": "array", "items": {"enum": ["boss", "nowcoder", "watchlist"]}, "uniqueItems": true}, "HK": {"type": "array", "items": {"enum": ["linkedin", "jobsdb", "watchlist"]}, "uniqueItems": true}}},
+    "fetch": {
+      "type": "object", "additionalProperties": false, "required": ["CN", "HK", "watchlist", "rate", "cooldown_hours"],
+      "properties": {
+        "CN": {"$ref": "#/$defs/cnFetch"}, "HK": {"$ref": "#/$defs/hkFetch"},
+        "watchlist": {"type": "object", "additionalProperties": false, "required": ["max_pages", "detail_limit"], "properties": {"max_pages": {"type": "integer", "minimum": 1}, "detail_limit": {"type": "integer", "minimum": 1}}},
+        "rate": {"type": "object", "additionalProperties": false, "properties": {"boss": {"$ref": "#/$defs/rateRange"}, "nowcoder": {"$ref": "#/$defs/rateRange"}, "linkedin": {"$ref": "#/$defs/rateRange"}, "jobsdb": {"$ref": "#/$defs/rateRange"}, "watchlist": {"$ref": "#/$defs/rateRange"}}},
+        "cooldown_hours": {"type": "integer", "minimum": 1}
+      }
+    },
+    "prescore": {"type": "object", "additionalProperties": false, "required": ["top_n", "min_overlap"], "properties": {"top_n": {"type": "integer", "minimum": 1}, "min_overlap": {"type": "integer", "minimum": 0}}},
+    "browser": {"type": "object", "additionalProperties": false, "required": ["profile"], "properties": {"profile": {"type": "string"}}}
+  },
+  "allOf": [
+    {"if": {"properties": {"sources": {"properties": {"CN": {"contains": {"const": "boss"}}}}}}, "then": {"properties": {"fetch": {"properties": {"CN": {"required": ["boss"]}}}}}},
+    {"if": {"properties": {"sources": {"properties": {"CN": {"contains": {"const": "nowcoder"}}}}}}, "then": {"properties": {"fetch": {"properties": {"CN": {"required": ["nowcoder"]}}}}}},
+    {"if": {"properties": {"sources": {"properties": {"HK": {"contains": {"const": "linkedin"}}}}}}, "then": {"properties": {"fetch": {"properties": {"HK": {"required": ["linkedin"]}}}}}},
+    {"if": {"properties": {"sources": {"properties": {"HK": {"contains": {"const": "jobsdb"}}}}}}, "then": {"properties": {"fetch": {"properties": {"HK": {"required": ["jobsdb"]}}}}}}
+  ],
+  "$defs": {
+    "queryBlock": {"type": "object", "additionalProperties": false, "required": ["keywords"], "properties": {"keywords": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}, "city": {"type": "string"}, "max_pages": {"type": "integer", "minimum": 1}, "page_size": {"type": "integer", "minimum": 1}, "detail_limit": {"type": "integer", "minimum": 1}, "extra": {"type": "object"}, "track": {"enum": ["intern", "campus"]}}},
+    "queryBlocks": {"oneOf": [{"$ref": "#/$defs/queryBlock"}, {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/queryBlock"}}]},
+    "cnFetch": {"type": "object", "additionalProperties": false, "properties": {"boss": {"$ref": "#/$defs/queryBlocks"}, "nowcoder": {"$ref": "#/$defs/queryBlocks"}, "watchlist": {"type": "object", "maxProperties": 0}}},
+    "hkFetch": {"type": "object", "additionalProperties": false, "properties": {"linkedin": {"$ref": "#/$defs/queryBlocks"}, "jobsdb": {"$ref": "#/$defs/queryBlocks"}, "watchlist": {"type": "object", "maxProperties": 0}}},
+    "rateRange": {"type": "array", "prefixItems": [{"type": "number", "minimum": 0}, {"type": "number", "minimum": 0}], "minItems": 2, "maxItems": 2}
+  }
+}

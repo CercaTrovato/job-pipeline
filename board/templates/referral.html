@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block body %}
+<h1>内推入口</h1>
+<p class="muted">贴 JD 全文即可入库；公司与岗位名留空时由分析步骤抽取。入库后在终端运行 <code>pipeline.py run</code>。</p>
+<div class="card" style="padding:18px 20px;max-width:720px"><form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+ <label>JD 全文（必填）</label><textarea name="jd_text" rows="12" required></textarea>
+ <label>链接</label><input name="url" placeholder="https://...">
+ <label>公司（可空）</label><input name="company">
+ <label>岗位（可空）</label><input name="title">
+ <label>地区</label><select name="region"><option value="CN">CN · 深圳</option><option value="HK">HK · 香港</option></select>
+ <div style="margin-top:14px"><button class="primary">入库</button></div>
+</form></div>
+{% endblock %}

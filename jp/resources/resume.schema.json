@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "resume/v1",
+  "type": "object",
+  "required": ["items"],
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "title", "text", "source_quote", "confirmed", "inferred"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "minLength": 1, "maxLength": 80},
+          "type": {"enum": ["skill", "education", "project", "experience", "research", "award", "language"]},
+          "title": {"type": "string", "minLength": 1, "maxLength": 160},
+          "text": {"type": "string", "minLength": 1, "maxLength": 3000},
+          "source_quote": {"type": "string", "minLength": 1, "maxLength": 1000},
+          "confirmed": {"const": false},
+          "inferred": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "code": 0,
+  "data": {
+    "job_post_list": [
+      {
+        "id": "SYN-FEISHU-POST-01",
+        "title": "算法实习生（合成样本）",
+        "description": "虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。",
+        "requirement": "虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。",
+        "job_category": {
+          "id": "SYN-CAT-01",
+          "name": "研发",
+          "en_name": "Engineering",
+          "i18n_name": "研发",
+          "depth": 2,
+          "parent": {
+            "id": "SYN-CAT-PARENT",
+            "name": "技术",
+            "en_name": "Technology",
+            "i18n_name": "技术",
+            "depth": 1,
+            "parent": null,
+            "children": null
+          },
+          "children": null
+        },
+        "city_info": null,
+        "recruit_type": {
+          "id": "202",
+          "name": "实习",
+          "en_name": "Intern",
+          "i18n_name": "实习",
+          "depth": 2,
+          "parent": {
+            "id": "2",
+            "name": "校招",
+            "en_name": "Campus",
+            "i18n_name": "校招",
+            "depth": 1,
+            "parent": null,
+            "children": null,
+            "active_status": 1,
+            "selectability": 1
+          },
+          "children": null,
+          "active_status": 1,
+          "selectability": 1
+        },
+        "publish_time": 1896307200000,
+        "city_list": [
+          {
+            "code": "SYN-SZ",
+            "name": "深圳",
+            "en_name": "Shenzhen",
+            "i18n_name": "深圳"
+          }
+        ],
+        "code": null
+      },
+      {
+        "id": "SYN-FEISHU-POST-02",
+        "title": "数据分析实习生（合成样本）",
+        "description": "虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。 虚构岗位样本：参与数据产品分析、需求梳理和结果复核。每周实习5天。",
+        "requirement": "虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。 虚构岗位样本要求：熟悉 Python、SQL，能清楚记录分析过程。",
+        "job_category": {
+          "id": "SYN-CAT-01",
+          "name": "研发",
+          "en_name": "Engineering",
+          "i18n_name": "研发",
+          "depth": 1,
+          "parent": null,
+          "children": null
+        },
+        "city_info": null,
+        "recruit_type": {
+          "id": "202",
+          "name": "实习",
+          "en_name": "Intern",
+          "i18n_name": "实习",
+          "depth": 2,
+          "parent": {
+            "id": "2",
+            "name": "校招",
+            "en_name": "Campus",
+            "i18n_name": "校招",
+            "depth": 1,
+            "parent": null,
+            "children": null,
+            "active_status": 1,
+            "selectability": 1
+          },
+          "children": null,
+          "active_status": 1,
+          "selectability": 1
+        },
+        "publish_time": 1896307200000,
+        "city_list": [
+          {
+            "code": "SYN-SZ",
+            "name": "深圳",
+            "en_name": "Shenzhen",
+            "i18n_name": "深圳"
+          }
+        ],
+        "code": null
+      }
+    ],
+    "count": 2
+  },
+  "message": "ok"
+}

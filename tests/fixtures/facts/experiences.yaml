@@ -1,0 +1,6 @@
+- id: bank
+  org: 某银行
+  role: 金融科技部实习生
+  period: 2025.07 – 2025.08
+  facts:
+    - {id: bank.rag, claim: "构建内部规范问答智能体，知识库 100+ 份文件", grade: C-user-confirmed}

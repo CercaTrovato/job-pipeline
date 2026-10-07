@@ -1,0 +1,146 @@
+# Synthetic test scenario only. These values are not user preferences or defaults.
+CN:
+  locations: [深圳, Shenzhen]
+  remote_locations: [成都, Chengdu] # Exercises the remote-location branch in unit tests.
+  max_days_per_week: 4
+  days_negotiable: true
+  max_min_months: 6
+  employment_types: [internship, parttime, unknown]
+  visa_ok: [none, unknown]
+  regex_kill:
+    - {pattern: "(全职|Full[- ]?time)(?![^。；;\\n]{0,15}(实习|intern))", reason: "要求全职"}
+    - {pattern: "已毕业|毕业生优先|graduated", reason: "要求已毕业"}
+    - {pattern: "((7|8|9|10|11|12|七|八|九|十|十一|十二)\\s*个月|(1|一)\\s*年)(以上|起|及以上)", reason: "要求 ≥7 个月"}
+  regex_flag:
+    - {pattern: "(每周|一周)\\s*5\\s*天|5\\s*days?\\s*(a|per)\\s*week", note: "要求每周 5 天（可谈）"}
+  campus:
+    locations: [深圳, Shenzhen, 成都, Chengdu]
+    max_days_per_week: 7
+    max_min_months: 99
+    employment_types: [fulltime, internship, parttime, unknown]
+    check_graduated: false
+    class_years: [2027] # Fixed synthetic cohort used only by graduation-year unit tests.
+    regex_kill: []
+HK:
+  locations:
+    - 香港
+    - Hong Kong
+    - HK
+    - 中国香港
+    - Kowloon
+    - 九龍
+    - 九龙
+    - 新界
+    - New Territories
+    - 港島
+    - 港岛
+    - Hong Kong Island
+    - 中環
+    - 中环
+    - 金鐘
+    - Admiralty
+    - 上環
+    - Sheung Wan
+    - 灣仔
+    - 湾仔
+    - Wan Chai
+    - 銅鑼灣
+    - 铜锣湾
+    - Causeway Bay
+    - 北角
+    - North Point
+    - 鰂魚涌
+    - Quarry Bay
+    - 太古
+    - Taikoo
+    - 柴灣
+    - Chai Wan
+    - 香港仔
+    - 數碼港
+    - Cyberport
+    - 跑馬地
+    - 尖沙咀
+    - Tsim Sha Tsui
+    - 佐敦
+    - 油麻地
+    - Yau Ma Tei
+    - 旺角
+    - Mong Kok
+    - 紅磡
+    - Hung Hom
+    - 九龍灣
+    - Kowloon Bay
+    - 觀塘
+    - 观塘
+    - Kwun Tong
+    - 啟德
+    - Kai Tak
+    - 九龍塘
+    - Kowloon Tong
+    - 何文田
+    - Ho Man Tin
+    - 新蒲崗
+    - San Po Kong
+    - 黃大仙
+    - Wong Tai Sin
+    - 荔枝角
+    - Lai Chi Kok
+    - 長沙灣
+    - Cheung Sha Wan
+    - 深水埗
+    - Sham Shui Po
+    - 沙田
+    - Sha Tin
+    - 科學園
+    - 大埔
+    - Tai Po
+    - 火炭
+    - Fo Tan
+    - 荃灣
+    - 荃湾
+    - Tsuen Wan
+    - 葵涌
+    - Kwai Chung
+    - 葵興
+    - Kwai Hing
+    - 葵青
+    - Kwai Tsing
+    - 青衣
+    - Tsing Yi
+    - 屯門
+    - Tuen Mun
+    - 元朗
+    - Yuen Long
+    - 天水圍
+    - Tin Shui Wai
+    - 將軍澳
+    - Tseung Kwan O
+    - TKO
+    - 西貢
+    - Sai Kung
+    - 東涌
+    - Tung Chung
+    - Eastern District
+    - Southern District
+    - North District
+    - Islands District
+    - Central and Western
+    - Central & Western
+    - Yau Tsim Mong
+    - Kowloon City
+  max_days_per_week: 4
+  days_negotiable: true
+  max_min_months: 99
+  employment_types: [internship, parttime, unknown]
+  visa_ok: [none, unknown]
+  regex_kill:
+    - {pattern: "must have graduated|fresh graduates? only|已畢業|已毕业", reason: "要求已毕业"}
+  regex_flag:
+    - {pattern: "5\\s*days?\\s*(a|per)\\s*week|full[- ]?time only", note: "要求每周 5 天 / 仅全职（可谈）"}
+  campus:
+    max_days_per_week: 7
+    employment_types: [fulltime, internship, parttime, unknown]
+    check_graduated: false
+    class_years: [2027] # Fixed synthetic cohort used only by graduation-year unit tests.
+    regex_kill:
+      - {pattern: "must have graduated|fresh graduates? only|已畢業|已毕业", reason: "要求已毕业"}

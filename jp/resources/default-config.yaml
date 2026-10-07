@@ -1,0 +1,35 @@
+version: 1
+llm:
+  backend: manual
+  model: ""
+  protocol: responses
+  base_url: ""
+  credential:
+    kind: env
+    name: JP_LLM_API_KEY
+  concurrency: 2
+  timeout_sec: 180
+  reasoning_effort: low
+budget:
+  max_jobs: 3
+sources:
+  CN: []
+  HK: []
+fetch:
+  CN: {}
+  HK: {}
+  watchlist:
+    max_pages: 3
+    detail_limit: 30
+  rate:
+    boss: [5, 10]
+    nowcoder: [3, 6]
+    linkedin: [6, 12]
+    jobsdb: [3, 6]
+    watchlist: [2, 4]
+  cooldown_hours: 24
+prescore:
+  top_n: 30
+  min_overlap: 1
+browser:
+  profile: ""

@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "totalCount": 43
+  },
+  "result": [
+    {
+      "id": 600400001,
+      "jobOpeningName": "Business Intelligence Officer",
+      "departmentId": "18502",
+      "departmentLabel": "Analytics",
+      "employmentStatusLabel": "Full-Time",
+      "employmentType": null,
+      "location": {
+        "city": "Hong Kong",
+        "state": "Hong Kong SAR",
+        "postalCode": "000",
+        "addressCountry": "Hong Kong"
+      },
+      "atsLocation": {
+        "country": null,
+        "state": null,
+        "province": null,
+        "city": null
+      },
+      "isRemote": null,
+      "locationType": "0"
+    },
+    {
+      "id": 600400002,
+      "jobOpeningName": "Data Operations Officer",
+      "departmentId": "18502",
+      "departmentLabel": "Analytics",
+      "employmentStatusLabel": "Full-Time",
+      "employmentType": null,
+      "location": {
+        "city": "Hong Kong",
+        "state": "Hong Kong SAR",
+        "postalCode": "000",
+        "addressCountry": "Hong Kong"
+      },
+      "atsLocation": {
+        "country": null,
+        "state": null,
+        "province": null,
+        "city": null
+      },
+      "isRemote": null,
+      "locationType": "0"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "data": [
+    {
+      "advertiser": {
+        "id": "SYN-ADV-001",
+        "description": "Harbor Analytics Limited"
+      },
+      "bulletPoints": [
+        "Python and SQL",
+        "Source checking"
+      ],
+      "classifications": [
+        {
+          "classification": {
+            "id": "6163",
+            "description": "Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues."
+          },
+          "subclassification": {
+            "id": "6166",
+            "description": "Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues."
+          }
+        }
+      ],
+      "companyName": "Harbor Analytics",
+      "companyProfileStructuredDataId": 682486,
+      "displayType": "standard",
+      "employer": {
+        "id": "682486",
+        "name": "Harbor Analytics"
+      },
+      "id": "800200001",
+      "isFeatured": false,
+      "listingDate": "2030-02-03",
+      "listingDateDisplay": "9m ago",
+      "locations": [
+        {
+          "label": "Hong Kong SAR",
+          "countryCode": "HK",
+          "seoHierarchy": [
+            {
+              "contextualName": "Hong Kong SAR"
+            }
+          ]
+        }
+      ],
+      "salaryLabel": "",
+      "teaser": "Synthetic sample role: assist a fictional team with research, analysis, and documentation. Synthetic sample role: assist a fictional team with research, analysis, and documentation.",
+      "title": "Program Intern",
+      "workTypes": [
+        "Full time"
+      ],
+      "workArrangements": {
+        "data": [
+          {
+            "id": "2",
+            "label": {
+              "text": "Hybrid"
+            }
+          }
+        ],
+        "displayText": "Hybrid"
+      }
+    },
+    {
+      "advertiser": {
+        "id": "SYN-ADV-002",
+        "description": "Northstar Devices Limited"
+      },
+      "bulletPoints": [
+        "Python and SQL",
+        "Source checking"
+      ],
+      "classifications": [
+        {
+          "classification": {
+            "id": "6008",
+            "description": "Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues."
+          },
+          "subclassification": {
+            "id": "6015",
+            "description": "Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues. Synthetic sample: help the fictional analytics team review data, document requirements, validate results, and share findings with colleagues."
+          }
+        }
+      ],
+      "companyName": "Northstar Devices",
+      "companyProfileStructuredDataId": 22254,
+      "displayType": "standard",
+      "employer": {
+        "id": "22254",
+        "name": "Northstar Devices"
+      },
+      "id": "800200002",
+      "isFeatured": false,
+      "listingDate": "2030-02-03",
+      "listingDateDisplay": "2h ago",
+      "locations": [
+        {
+          "label": "Hong Kong SAR",
+          "countryCode": "HK",
+          "seoHierarchy": [
+            {
+              "contextualName": "Hong Kong SAR"
+            }
+          ]
+        }
+      ],
+      "salaryLabel": "",
+      "teaser": "Synthetic sample role: assist a fictional team with research, analysis, and documentation. Synthetic sample role: assist a fictional team with research, analysis, and documentation.",
+      "title": "Analytics Intern",
+      "workTypes": [
+        "Full time"
+      ],
+      "workArrangements": {
+        "data": [
+          {
+            "id": "1",
+            "label": {
+              "text": "On-site"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "totalCount": 618
+}

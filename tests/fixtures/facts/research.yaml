@@ -1,0 +1,12 @@
+- id: paper1
+  title: Attributed Graph Clustering with Contrastive Learning
+  role: 第一作者
+  grade: A
+  facts:
+    - {id: p1.eng, claim: "PyTorch 实现全部模型与训练流程"}
+- id: preprints
+  items:
+    - {title: "Demo Graph Clustering Network", arxiv: "0000.00001", role: 第一作者 · 预印本}
+    - {title: "Second Demo Fusion Network", arxiv: "0000.00002", role: 第二作者 · 预印本}
+  note: 演示用途，仿真数据
+  grade: B

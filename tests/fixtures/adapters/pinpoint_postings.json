@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "id": 500500001,
+      "benefits": "",
+      "benefits_header": "",
+      "compensation": null,
+      "compensation_minimum": null,
+      "compensation_maximum": null,
+      "compensation_currency": null,
+      "compensation_frequency": null,
+      "compensation_visible": false,
+      "deadline_at": "2030-05-30T00:00:00Z",
+      "description": "<p>Synthetic sample: support a fictional analytics team and document reproducible work. Synthetic sample: support a fictional analytics team and document reproducible work. Synthetic sample: support a fictional analytics team and document reproducible work. Synthetic sample: support a fictional analytics team and document reproducible work. Synthetic sample: support a fictional analytics team and document reproducible work.</p>",
+      "employment_type": "permanent_full_time",
+      "employment_type_text": "Permanent - Full Time",
+      "key_responsibilities": "<p>Synthetic responsibilities: review data, validate results, share findings. Synthetic responsibilities: review data, validate results, share findings. Synthetic responsibilities: review data, validate results, share findings.</p>",
+      "key_responsibilities_header": "Responsibilities",
+      "reporting_to": "",
+      "skills_knowledge_expertise": "<p>Synthetic qualifications: Python, SQL, and careful source checking. Synthetic qualifications: Python, SQL, and careful source checking. Synthetic qualifications: Python, SQL, and careful source checking. Synthetic qualifications: Python, SQL, and careful source checking.</p>",
+      "skills_knowledge_expertise_header": "Requirements",
+      "title": "Senior Analyst (Synthetic Data)",
+      "url": "https://jobs.example.test/en/postings/500500001",
+      "path": "/en/postings/500500001",
+      "workplace_type": "onsite",
+      "workplace_type_text": "Onsite",
+      "location": {
+        "id": "46900",
+        "city": "Hong Kong SAR",
+        "name": "Hong Kong (SAR)",
+        "postal_code": "000",
+        "province": "Hong Kong SAR",
+        "street_address": ""
+      }
+    },
+    {
+      "id": 500500002,
+      "benefits": "",
+      "benefits_header": "",
+      "compensation": null,
+      "compensation_minimum": null,
+      "compensation_maximum": null,
+      "compensation_currency": null,
+      "compensation_frequency": null,
+      "compensation_visible": false,
+      "deadline_at": "2030-05-30T00:00:00Z",
+      "description": "<p>Synthetic sample: support a fictional analytics team and document reproducible work. Synthetic sample: support a fictional analytics team and document reproducible work. Synthetic sample: support a fictional analytics team and document reproducible work. Synthetic sample: support a fictional analytics team and document reproducible work. Synthetic sample: support a fictional analytics team and document reproducible work.</p>",
+      "employment_type": "permanent_full_time",
+      "employment_type_text": "Permanent - Full Time",
+      "key_responsibilities": "<p>Synthetic responsibilities: review data, validate results, share findings. Synthetic responsibilities: review data, validate results, share findings. Synthetic responsibilities: review data, validate results, share findings.</p>",
+      "key_responsibilities_header": "Responsibilities",
+      "reporting_to": "",
+      "skills_knowledge_expertise": "<p>Synthetic qualifications: Python, SQL, and careful source checking. Synthetic qualifications: Python, SQL, and careful source checking. Synthetic qualifications: Python, SQL, and careful source checking. Synthetic qualifications: Python, SQL, and careful source checking.</p>",
+      "skills_knowledge_expertise_header": "Requirements",
+      "title": "Systems Associate",
+      "url": "https://jobs.example.test/en/postings/500500002",
+      "path": "/en/postings/500500002",
+      "workplace_type": "onsite",
+      "workplace_type_text": "Onsite",
+      "location": {
+        "id": "46900",
+        "city": "Hong Kong SAR",
+        "name": "Hong Kong (SAR)",
+        "postal_code": "000",
+        "province": "Hong Kong SAR",
+        "street_address": ""
+      }
+    }
+  ]
+}

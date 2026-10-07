@@ -1,0 +1,17 @@
+{
+  "jobPostingInfo": {
+    "id": "SYN-WORKDAY-RECORD-001",
+    "title": "ExampleCo 2027 Summer Internship Programme",
+    "jobDescription": "<p>Synthetic sample: assist a fictional data team with analysis, testing, and documentation. Synthetic sample: assist a fictional data team with analysis, testing, and documentation. Synthetic sample: assist a fictional data team with analysis, testing, and documentation. Synthetic sample: assist a fictional data team with analysis, testing, and documentation.</p>",
+    "location": "Hong Kong SAR",
+    "postedOn": "Posted 2 February 2030",
+    "startDate": "2030-06-01",
+    "timeType": "Full time",
+    "jobReqId": "FAKE-REQ-001",
+    "externalUrl": "",
+    "country": {
+      "descriptor": "Hong Kong",
+      "id": "SYN-COUNTRY-HK"
+    }
+  }
+}

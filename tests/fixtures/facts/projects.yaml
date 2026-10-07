@@ -1,0 +1,8 @@
+- id: demo
+  name: 示例采集系统
+  role: 独立开发
+  period: 2026.07
+  grade: A/B
+  facts:
+    - {id: demo.tiers, claim: "三档抓取适配器统一 fetch 接口：curl_cffi → Playwright → Firecrawl", numbers: ["3"]}
+    - {id: demo.llm, claim: "LLM 结构化抽取层支持 codex / Ollama 后端，JSON Schema 输出", grade: C-user-confirmed}

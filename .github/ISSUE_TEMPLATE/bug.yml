@@ -1,0 +1,20 @@
+name: 故障报告
+description: 请只提供脱敏信息，不上传个人工作区或密钥。
+body:
+  - type: input
+    id: version
+    attributes:
+      label: 版本与操作系统
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostic
+    attributes:
+      label: 脱敏错误或 doctor 结果
+      description: 不要上传 API key、令牌、简历、数据库或整个配置文件。

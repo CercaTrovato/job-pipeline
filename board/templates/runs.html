@@ -1,0 +1,33 @@
+{% extends "base.html" %}{% block body %}
+<h1>运行进度</h1>
+<table id="runs"><thead><tr><th>#</th><th>命令</th><th>来源</th><th>开始</th><th>进度</th><th>新增/已见</th><th>状态</th><th>错误</th></tr></thead>
+<tbody id="runs-body">
+{% for r in rows %}<tr><td>{{ r.run_id }}</td><td>{{ r.command }}</td><td>{{ r.source or "" }}</td><td>{{ r.started_at }}</td>
+<td>{{ r.pages_done }}/{{ r.pages_total }} 页 · {{ r.packets_done }}/{{ r.packets_total }} 包</td><td>{{ r.jobs_new }}/{{ r.jobs_seen }}</td>
+<td><span class="chip{% if r.status in ('error','cooldown') %} ability{% endif %}">{{ r.status }}</span></td><td class="muted">{{ r.last_error or "" }}</td></tr>{% endfor %}
+</tbody></table>
+<script>
+function buildRunRow(r){
+ const tr=document.createElement('tr');
+ const cols=[r.run_id,r.command,r.source||'',r.started_at,
+  r.pages_done+'/'+r.pages_total+' 页 · '+r.packets_done+'/'+r.packets_total+' 包',
+  r.jobs_new+'/'+r.jobs_seen];
+ for(const val of cols){const td=document.createElement('td');td.textContent=val;tr.appendChild(td);}
+ const statusTd=document.createElement('td');
+ const span=document.createElement('span');
+ span.className='chip'+((r.status==='error'||r.status==='cooldown')?' ability':'');
+ span.textContent=r.status;
+ statusTd.appendChild(span);
+ tr.appendChild(statusTd);
+ const errTd=document.createElement('td');
+ errTd.textContent=r.last_error||'';
+ tr.appendChild(errTd);
+ return tr;
+}
+setInterval(async()=>{
+ const rs=await (await fetch('/runs.json')).json();
+ const tbody=document.getElementById('runs-body');
+ tbody.replaceChildren(...rs.map(buildRunRow));
+},3000);
+</script>
+{% endblock %}

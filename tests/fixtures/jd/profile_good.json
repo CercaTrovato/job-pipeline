@@ -1,0 +1,9 @@
+{
+  "headline": "数据科学本科，有 LLM 应用与采集系统经历",
+  "dimensions": [
+    {"id": "programming_data", "name": "编程与数据", "summary": "掌握 Python（pandas / NumPy）、SQL、Git，做过示例采集系统的三档抓取适配器统一 fetch 接口。", "fact_ids": ["skill.programming", "demo.tiers"], "grade": "A"},
+    {"id": "llm_apps", "name": "LLM 应用", "summary": "有 Prompt 工程、RAG / 知识库问答与 JSON Schema 结构化抽取经验，在某银行构建内部规范问答智能体，知识库 100+ 份文件。", "fact_ids": ["skill.llm_app", "bank.rag", "demo.llm"], "grade": "B"},
+    {"id": "ml_research", "name": "机器学习与科研", "summary": "第一作者论文 Attributed Graph Clustering with Contrastive Learning，PyTorch 实现全部模型与训练流程。", "fact_ids": ["p1.eng"], "grade": "A"},
+    {"id": "education_language", "name": "教育与语言", "summary": "香港城市大学商业人工智能理学硕士在读，课程含商业数据分析、金融科技与金融人工智能；普通话 / 粤语母语，英语 IELTS 7.0。", "fact_ids": ["edu.msc", "language"], "grade": "A"}
+  ]
+}

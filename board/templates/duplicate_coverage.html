@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block body %}
+<p class="faint"><a href="{{ url_for('prescreened') }}">← 返回粗筛淘汰</a></p>
+<h1>重复簇覆盖 <span class="faint">{{ clusters|length }}</span></h1>
+<p class="muted">每簇保留一个代表帖；下方说明它已被选择、仍待处理，还是因条件、相关性或来源证据不足而未进入待挑选。不同公司共用 JD 不能证明招聘主体相同；人工入队的公司仍分别处理。</p>
+{% if clusters %}<div class="table-scroll"><table><thead><tr><th>代表岗位</th><th>重复副本</th><th>代表状态</th><th>未展示或待处理原因</th></tr></thead><tbody>
+{% for c in clusters %}<tr><td>{% if c.company %}<a class="job-title" href="{{ url_for('job',job_id=c.job_id,return_to=url_for('prescreened')) }}">{{ c.title }}</a><div class="company">{{ c.company }}</div>{% else %}代表记录不存在：{{ c.job_id }}{% endif %}</td>
+<td>{{ c.children_count }}</td><td>{{ c.status_label }}</td><td class="muted">{{ c.reason }}{% if c.eligible %}<div>下一次手动运行前将加入可见分析队列。</div>{% endif %}</td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty-state"><h2>暂无重复簇</h2></div>{% endif %}
+{% endblock %}

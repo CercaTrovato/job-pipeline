@@ -1,0 +1,8 @@
+{
+  "atomic_requirements": [{"id": "R1", "quote": "熟悉 Python", "requirement": "Python 编程", "level": "high", "kind": "skill"}],
+  "keywords": {"must": ["Python"], "core": [], "bonus": []},
+  "hard_conditions": {"location": ["深圳"], "days_per_week": 4, "min_months": 3, "employment_type": "internship",
+                      "graduated_required": false, "onsite_days": null, "visa": "unknown", "language": []},
+  "flags": {"entry_level": true, "remote": false, "full_time": false},
+  "summary": "深圳大模型应用实习，要求 Python。"
+}

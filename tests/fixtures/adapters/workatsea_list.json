@@ -1,0 +1,41 @@
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "job_list": [
+      {
+        "id": 136779,
+        "job_id": "FAKE-JOB-001",
+        "job_name": "Data Science Intern (Shenzhen)",
+        "department_id": 9,
+        "employment_id": 2,
+        "region_id": 1,
+        "city_id": 2,
+        "post_type": 2,
+        "external_entity_id": 1,
+        "job_type_id": 0,
+        "job_description": "Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product.",
+        "requirements": "Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation.",
+        "sub_team_description": "Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group.",
+        "application_form_id": 17
+      },
+      {
+        "id": 136780,
+        "job_id": "FAKE-JOB-002",
+        "job_name": "Data Science Intern (Shenzhen)",
+        "department_id": 9,
+        "employment_id": 3,
+        "region_id": 3,
+        "city_id": 6,
+        "post_type": 2,
+        "external_entity_id": 1,
+        "job_type_id": 0,
+        "job_description": "Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product. Synthetic sample: contribute to LLM-based analytics for a fictional data product.",
+        "requirements": "Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation. Synthetic sample requirements: Python, SQL, and clear documentation.",
+        "sub_team_description": "Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group. Synthetic sample team description: a fictional analytics group.",
+        "application_form_id": 17
+      }
+    ],
+    "total_count": 2575
+  }
+}

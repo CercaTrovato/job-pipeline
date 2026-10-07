@@ -1,0 +1,46 @@
+{
+  "code": 0,
+  "data": {
+    "flat_locations": [
+      {
+        "region_id": 1,
+        "region_name": "Brazil",
+        "region_abbr": "BR",
+        "default_region": 1,
+        "career_value_region": 0,
+        "city_id": 2,
+        "city_name": "São Paulo",
+        "city_abbr": "São Paulo",
+        "city_count": 1,
+        "default_city": 1,
+        "career_value_city": 13,
+        "region_transify_key": "region_brazil",
+        "city_transify_key": "city_saopaulo",
+        "display_sites": [
+          4,
+          2,
+          1
+        ]
+      },
+      {
+        "region_id": 3,
+        "region_name": "China",
+        "region_abbr": "CN",
+        "default_region": 1,
+        "career_value_region": 0,
+        "city_id": 6,
+        "city_name": "Shenzhen",
+        "city_abbr": "Shenzhen",
+        "city_count": 2,
+        "default_city": 1,
+        "career_value_city": 2,
+        "region_transify_key": "region_china",
+        "city_transify_key": "city_shenzhen",
+        "display_sites": [
+          4,
+          2
+        ]
+      }
+    ]
+  }
+}

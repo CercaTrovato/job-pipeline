@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block body %}
+<h1>粗筛淘汰 <span class="faint">{{ total }}</span></h1>
+<p class="muted">此页也包含未分析候补、硬条件不合及重复帖。重复帖可查看折叠原因和代表岗位的去向。</p>
+<p><a href="{{ url_for('duplicate_coverage_page') }}">查看重复簇覆盖与未进入待挑选的原因</a></p>
+{% include "filters.html" %}
+{% if rows %}<div class="table-scroll"><table><thead><tr><th>粗筛分</th><th>公司 / 岗位</th><th>地区 / 来源</th><th>淘汰类型</th><th>操作</th></tr></thead><tbody>
+{% for r in rows %}<tr data-job-id="{{ r.job_id }}"><td>{{ r.prescore if r.prescore is not none else '—' }}</td>
+<td><a class="job-title" href="{{ url_for('job',job_id=r.job_id,return_to=list_url) }}">{{ r.title }}</a><div class="company">{{ r.company }}</div><div class="chips job-tags">{% for role in r.roles %}<span class="chip plain">{{ role_names[role] }}</span>{% endfor %}{% for stage in r.stages if stage!='unspecified' %}<span class="chip plain">{{ stage_names[stage] }}</span>{% endfor %}</div></td>
+<td class="muted">{{ r.region }} · {{ source_names.get(r.source,r.source) }}{% if r.location %}<div class="faint">{{ r.location }}</div>{% endif %}</td>
+<td><span class="chip {{ 'hard' if r.status=='rejected_hard' else 'plain' }}">{{ status_names[r.status] }}</span>{% if r.duplicate %}<div class="faint">{{ r.duplicate.reason }}</div>{% if r.duplicate.representative %}<div class="faint">代表：<a href="{{ url_for('job',job_id=r.duplicate.representative.job_id,return_to=list_url) }}">{{ r.duplicate.representative.company }} · {{ r.duplicate.representative.title }}</a>（{{ r.duplicate.representative.status_label }}）</div>{% else %}<div class="faint">代表帖记录未找到</div>{% endif %}{% endif %}</td>
+<td><form class="inline" method="post" action="/requeue/{{ r.job_id }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="return_to" value="{{ list_url }}"><button>重新入队</button></form></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty-state"><h2>{{ '没有符合条件的岗位' if total else '暂无粗筛淘汰岗位' }}</h2><p>试试减少筛选条件，或更换搜索词。</p><a href="{{ base }}">清除全部筛选</a></div>{% endif %}
+{% include "pagination.html" %}
+{% endblock %}

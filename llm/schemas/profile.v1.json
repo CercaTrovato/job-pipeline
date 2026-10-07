@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "profile/v1",
+  "type": "object",
+  "required": ["headline", "dimensions"],
+  "additionalProperties": false,
+  "properties": {
+    "headline": {"type": "string", "minLength": 10, "maxLength": 120},
+    "dimensions": {
+      "type": "array", "minItems": 4, "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "summary", "fact_ids", "grade"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]{1,30}$"},
+          "name": {"type": "string", "minLength": 2, "maxLength": 30},
+          "summary": {"type": "string", "minLength": 20, "maxLength": 400},
+          "fact_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "grade": {"enum": ["A", "B", "C", "D"]}
+        }
+      }
+    }
+  }
+}

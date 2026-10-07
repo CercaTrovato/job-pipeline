@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block body %}
+<h1>待分析队列 <span class="faint">{{ total }}</span></h1>
+<p class="muted">重新入队后岗位先在这里显示；不会自动调用模型。下一次手动运行每轮最多处理 3 条，默认优先处理人工入队。完成分析与匹配后才进入“待挑选”。</p>
+{% include "filters.html" %}
+{% if rows %}<div class="table-scroll"><table><thead><tr><th>顺序</th><th>公司 / 岗位</th><th>地区 / 来源</th><th>状态与重复核对</th></tr></thead><tbody>
+{% for r in rows %}<tr id="job-{{ r.job_id }}" data-job-id="{{ r.job_id }}">
+<td><b>{{ r.queue_rank }}</b><div class="faint">粗筛 {{ r.prescore if r.prescore is not none else '—' }}</div></td>
+<td><a class="job-title" href="{{ url_for('job',job_id=r.job_id,return_to=list_url) }}">{{ r.title }}</a><div class="company">{{ r.company }}</div><div class="chips job-tags">{% for role in r.roles %}<span class="chip plain">{{ role_names[role] }}</span>{% endfor %}{% for stage in r.stages if stage!='unspecified' %}<span class="chip plain">{{ stage_names[stage] }}</span>{% endfor %}</div></td>
+<td class="muted">{{ r.region }} · {{ source_names.get(r.source,r.source) }}{% if r.location %}<div class="faint">{{ r.location }}</div>{% endif %}</td>
+<td><span class="chip plain">{{ status_names.get(r.status,r.status) }}</span>{% if r.manual_requeued %} <span class="chip plain">人工入队优先</span>{% endif %}
+{% if r.original_representative %}<div class="faint">原代表：<a href="{{ url_for('job',job_id=r.original_representative.job_id,return_to=list_url) }}">{{ r.original_representative.company }} · {{ r.original_representative.title }}</a>（{{ r.original_representative.status_label }}）</div>{% endif %}
+{% if r.original_duplicate_reason %}<div class="faint">原折叠原因：{{ r.original_duplicate_reason }}</div>{% endif %}
+{% for a in r.same_jd_approved %}<div class="faint">同文已选：<a href="{{ url_for('job',job_id=a.job_id,return_to=list_url) }}">{{ a.company }} · {{ a.title }}</a>（{{ a.status_label }}）</div>{% endfor %}
+{% if r.blocking_approved %}<div class="chip hard">同招聘品牌已有相同 JD / 职位编号的已选岗位；本条不会重复调用模型。</div>{% endif %}
+{% if r.same_jd_approved %}<div class="faint">不同招聘品牌可分别分析；请核实公司来源。</div>{% endif %}
+</td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty-state"><h2>{{ '没有符合条件的岗位' if total else '队列为空' }}</h2><p>试试清除筛选条件，或在粗筛页重新入队。</p><a href="{{ base }}">清除全部筛选</a></div>{% endif %}
+{% include "pagination.html" %}
+{% endblock %}

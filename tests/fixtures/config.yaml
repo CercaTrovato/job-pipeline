@@ -1,0 +1,29 @@
+# 虚构核心回归场景；不作为产品默认配置。
+paths:
+  db: data/test.sqlite
+  tasks_dir: tasks
+  resume_repo: tests/fixtures/resume-repo
+  facts_index: data/facts_index.json
+  candidate_profile: data/candidate_profile.json
+  constraints: tests/fixtures/constraints.yaml
+  watchlist: tests/fixtures/watchlist.yaml
+llm:
+  backend: manual
+  codex_model: test-model
+  codex_reasoning_effort: low
+  codex_concurrency: 2
+  codex_job_budget: 3
+  codex_timeout_sec: 180
+  api:
+    protocol: responses
+    base_url: https://example.com/v1
+    model: test-model
+    credential_kind: env
+    credential_name: JP_LLM_API_KEY
+    key_env: JP_LLM_API_KEY
+    concurrency: 2
+    timeout_sec: 180
+    reasoning_effort: low
+prescore:
+  top_n: 30
+  min_overlap: 1

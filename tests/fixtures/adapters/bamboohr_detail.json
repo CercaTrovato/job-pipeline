@@ -1,0 +1,18 @@
+{
+  "result": {
+    "jobOpening": {
+      "jobOpeningShareUrl": "https://careers.example.test/careers/600400001",
+      "jobOpeningName": "Business Intelligence Officer",
+      "departmentLabel": "Analytics",
+      "employmentStatusLabel": "Full-Time",
+      "location": {
+        "city": "Hong Kong",
+        "state": "Hong Kong SAR",
+        "postalCode": "000",
+        "addressCountry": "Hong Kong"
+      },
+      "description": "<p>Synthetic sample: assist a fictional team with data review, analysis, and documentation. Synthetic sample: assist a fictional team with data review, analysis, and documentation. Synthetic sample: assist a fictional team with data review, analysis, and documentation. Synthetic sample: assist a fictional team with data review, analysis, and documentation.</p>",
+      "datePosted": "2030-02-03"
+    }
+  }
+}

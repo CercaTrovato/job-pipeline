@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='setup.css') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<header class="setup-heading"><div><p class="eyebrow">YOUR LOCAL JOB WORKSPACE</p><h1>把机会整理好，<br>把选择留给自己。</h1><p class="muted">从你正在用的 AI 开始，建立自己的求职工作台。</p></div><div class="local-stamp"><span>本机运行</span><small>资料存放在用户工作区<br>采集和模型调用由你启动</small></div></header>
+<nav class="setup-tabs" aria-label="设置步骤"><a href="#models">01 模型配置</a><a href="#profile">02 我的经历</a><a href="#sources">03 岗位来源</a><a href="#tasks">04 开始运行</a></nav>
+<div id="notice" role="status" aria-live="polite" hidden></div>
+<section id="models" class="setup-section">
+<div class="section-header"><h2>使用你熟悉的 AI</h2><span class="status-chip" id="model-status">读取配置中</span></div>
+<div class="agent-panel"><p class="eyebrow">推荐 · AGENT 辅助配置</p><h3>让我的 AI 帮我配置</h3><p>复制下面的指令，交给能操作本机文件的 Codex、Claude Code 或其他 Agent。它会读取项目说明、复用可用设置并检查连接。</p><div class="copy-row"><button type="button" class="primary" id="copy-prompt">复制配置提示词</button><span id="copy-state" class="muted">不需要手动编辑配置文件</span></div><details><summary>查看将要复制的提示词</summary><textarea id="agent-prompt" readonly rows="12" aria-label="Agent 配置提示词"></textarea></details><p class="small-note">普通聊天网页不能访问本机文件时，请使用下面的手动向导。Agent 帮忙配置，与实际调用哪个模型是两件事。</p></div>
+<details class="manual-panel" id="manual-panel"><summary>手动配置模型</summary>
+<form id="model-form"><div class="field-grid"><div><label for="backend">接入方式</label><select id="backend"><option value="manual">手动填写任务包（无需密钥）</option><option value="codex">已登录的 Codex CLI</option><option value="api">模型 API</option><option value="claude">Claude 手动任务包（不是自动 CLI）</option></select></div><div><label for="provider">API 填写示例</label><select id="provider"><option value="custom">自定义 / 保留现有设置</option><option value="deepseek">DeepSeek</option><option value="openai">OpenAI</option><option value="anthropic">Anthropic</option></select></div></div>
+<div class="field-grid"><div><label for="model">模型名称 / ID</label><input id="model" autocomplete="off" placeholder="填写服务商或现有 Agent 配置中的模型 ID"><small>不自动猜测模型，也不会自动切换厂商。</small></div><div><label for="protocol">API 协议</label><select id="protocol"><option value="responses">Responses</option><option value="chat_completions">Chat Completions（如 DeepSeek）</option><option value="anthropic">Anthropic Messages</option></select></div><div><label for="base-url">服务地址</label><input id="base-url" type="url" placeholder="https://api.example.com/v1"><small>从你已有的工具或服务商文档取得，不要填写含密钥的链接。</small></div><div><label for="credential-kind">密钥保存方式</label><select id="credential-kind"><option value="session">仅当前服务会话（推荐首次尝试）</option><option value="env">已有环境变量</option><option value="keyring">系统凭据库</option></select></div><div><label for="credential-name">环境变量或凭据名称</label><input id="credential-name" value="JP_LLM_API_KEY" autocomplete="off"></div><div><label for="session-key">输入密钥（不回显、不写配置）</label><input id="session-key" type="password" autocomplete="new-password" placeholder="已配置时留空即可"><small>仅用于会话或系统凭据库；环境变量需在系统中设置。</small></div></div>
+<div class="form-footer"><button type="submit" class="primary">保存并测试连接</button><button type="button" id="save-model-only">仅保存，不调用模型</button></div><p class="small-note">测试只发送一段虚构内容并校验 JSON，会消耗少量额度。订阅登录不是通用 API key。</p></form></details>
+<p class="diagnostic-note" id="diagnosis"></p>
+</section>
+<section id="profile" class="setup-section" hidden>
+<div class="section-header"><h2>用真实经历作为匹配依据</h2><span id="fact-count" class="status-chip"></span></div>
+<p class="muted">上传文本 PDF / Word，或粘贴简历。文件在内存中提取，不保留原始上传文件。扫描 PDF 请先转为文本。</p>
+<form id="upload-form" class="upload-box"><label for="resume-file">选择 PDF 或 DOCX（最大 5 MB）</label><input id="resume-file" type="file" accept=".pdf,.docx"><button class="primary" type="submit">本地提取并预览</button></form>
+<label for="resume-text">脱敏预览 / 手动输入</label><textarea id="resume-text" rows="12" placeholder="在这里粘贴或校正简历文本"></textarea><p class="small-note">常见电话、邮箱、证件号、年龄和性别会遮盖；请自行检查姓名及其他敏感信息。只有点击生成草稿后，校正内容才交给所选模型。</p>
+<div class="form-footer"><button type="button" id="save-preview">保存本地预览</button><button type="button" class="primary" id="generate-draft">确认文本，生成经历草稿</button><button type="button" id="collect-draft">回收手动任务包</button></div>
+<div id="draft-items"></div><button type="button" class="primary" id="confirm-facts" hidden>确认所选经历，用于匹配</button>
+<details><summary>查看已经确认的经历</summary><pre id="confirmed-facts"></pre></details>
+</section>
+<section id="sources" class="setup-section" hidden>
+<div class="section-header"><h2>告诉工作台，你在找什么</h2><span class="status-chip">来源默认关闭</span></div>
+<form id="sources-form"><h3>搜索设置</h3><div class="field-grid"><div><label for="search-region">设置地区</label><select id="search-region"><option value="CN">中国内地 · CN</option><option value="HK">中国香港 · HK</option></select></div><div><label for="search-city">搜索城市</label><input id="search-city" placeholder="如：你的目标城市"></div><div><label for="search-keywords">关键词（逗号分隔）</label><input id="search-keywords" placeholder="Python, 数据分析"></div><div><label for="browser-profile">OpenCLI 浏览器 Profile（可选）</label><input id="browser-profile" placeholder="仅一个已连接 Profile 时可留空"></div></div>
+<fieldset class="source-options"><legend>启用来源</legend><label><input type="checkbox" value="boss"> Boss</label><label><input type="checkbox" value="nowcoder"> 牛客</label><label><input type="checkbox" value="linkedin"> LinkedIn</label><label><input type="checkbox" value="jobsdb"> JobsDB</label><label><input type="checkbox" value="watchlist"> 公司官网</label></fieldset>
+<p class="small-note">浏览器来源：先按 <a href="https://github.com/jackwener/opencli" target="_blank" rel="noopener noreferrer">OpenCLI 安装说明</a>安装工具和扩展，打开浏览器并登录平台。遇验证码或限流会停止该来源并冷却，不自动处理。</p>
+<h3>硬条件（当前地区）</h3><div class="field-grid"><div><label for="allowed-cities">允许地点（逗号分隔；留空不限）</label><input id="allowed-cities"></div><div><label for="class-year">校招毕业年份（留空不限）</label><input id="class-year" type="number" min="2000" max="2100"></div><div><label for="max-days">最多每周到岗天数</label><input id="max-days" type="number" min="1" max="7" value="7"></div><div><label for="max-months">接受岗位要求的最短月数上限</label><input id="max-months" type="number" min="1" max="99" value="99"></div></div><label class="check-line"><input id="negotiable" type="checkbox"> 超出每周到岗天数时，只标注“可谈”</label>
+<details><summary>官网 / ATS 高级设置</summary><p class="small-note">支持现有官网适配器。可把目标公司网址交给 Agent，按说明填入 ATS 租户参数；这里不猜测接口。</p><label for="watchlist-json">官网清单 JSON</label><textarea id="watchlist-json" rows="8"></textarea></details>
+<details><summary>高级采集配置（多查询块、轨道、翻页与详情预算）</summary><label for="fetch-json">当前地区采集 JSON</label><textarea id="fetch-json" rows="8"></textarea><label class="check-line"><input id="advanced-fetch" type="checkbox"> 本次保存使用高级配置，保留多查询块</label></details>
+<div class="form-footer"><button type="submit" class="primary">保存当前地区设置</button><button type="button" id="check-sources">检查来源连接</button></div></form><pre id="source-status" hidden></pre>
+</section>
+<section id="tasks" class="setup-section" hidden>
+<div class="section-header"><h2>按你的预算开始</h2><a href="/">查看岗位看板 →</a></div>
+<p class="muted">采集、分析和完整流水线分别启动。每个工作区同时运行一个任务；停止会保留已完成结果。</p>
+<div class="field-grid"><div><label for="run-region">运行地区</label><select id="run-region"><option value="CN">中国内地</option><option value="HK">中国香港</option></select></div><div><label for="max-jobs">本轮最多分析岗位数</label><input id="max-jobs" type="number" value="3" min="1" max="100"></div></div>
+<div class="form-footer"><button type="button" data-run="fetch">只采集岗位</button><button type="button" data-run="analyze">分析已有岗位</button><button type="button" class="primary" data-run="pipeline">采集并分析</button><button type="button" id="demo">导入离线演示</button></div>
+<div class="table-scroll"><table><thead><tr><th>任务</th><th>状态</th><th>阶段与结果</th><th>操作</th></tr></thead><tbody id="task-rows"></tbody></table></div><p id="no-tasks" class="small-note">尚无任务。可以先使用离线演示体验看板。</p>
+</section>
+<footer class="workspace-footer">数据工作区：<code>{{ workspace }}</code><br>API 密钥不写入配置。平台登录与最终投递由你完成。</footer>
+<script src="{{ url_for('static', filename='setup.js') }}" defer></script>
+{% endblock %}
