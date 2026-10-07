@@ -43,6 +43,11 @@ def parser():
 
 
 def main(argv=None):
+    # Windows 的重定向输出可能默认 cp1252，中文诊断应与 JSON 文件一样使用 UTF-8。
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            reconfigure(encoding="utf-8", errors="backslashreplace")
     args = parser().parse_args(argv)
     try:
         workspace = settings.Workspace(args.workspace).initialize()
