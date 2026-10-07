@@ -23,7 +23,9 @@ job-pipeline start
 
 ## 验证范围
 
-Windows Python 3.12 安装和浏览器流程已实测。此前离线测试为 350 passed、1 skipped；跳过项是未分发的旧 OpenCLI 补丁辅助工具。已完成一次真实 Codex 最小 JSON/schema 请求。GitHub Actions 的跨系统离线结果以该版本对应的 workflow 为准，不代表真实浏览器采集已实测。
+Windows Python 3.12 安装和浏览器流程已实测。离线测试为 351 passed、1 skipped；跳过项是未分发的旧 OpenCLI 补丁辅助工具。已完成一次真实 Codex 最小 JSON/schema 请求。
+
+[GitHub Actions](https://github.com/CercaTrovato/job-pipeline/actions/runs/37596223338) 的 Windows/macOS/Linux × Python 3.11/3.12/3.13 九个组合全部通过，覆盖依赖安装、测试、构建、doctor 和 demo。已修复英文 Windows 重定向终端无法输出中文诊断的问题。CI 不代表真实浏览器采集已实测。
 
 macOS/Linux 实机浏览器、其他品牌 Agent harness、真实 API key 和招聘平台采集仍待验证。首次使用建议从离线 demo 和最小连接测试开始。这是预发布版本，暂不作为稳定版保证。
 

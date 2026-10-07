@@ -55,5 +55,5 @@ A local-first job research workspace: collect job listings, apply deterministic 
 ## 验证与贡献
 
 当前验证状态见 [docs/PROGRESS.md](docs/PROGRESS.md)。未实测的平台或来源不能视为可用保证。
-首版是发布候选：Windows Python 3.12 已实测；macOS/Linux 与其他 Python 版本有 CI 配置，尚无运行证据。真实 API key 与招聘平台采集尚待使用者逐项验证。
+首版是公开测试版：Windows 浏览器已实测，Windows/macOS/Linux × Python 3.11/3.12/3.13 的 9 个 CI 组合均通过安装、离线测试和构建。macOS/Linux 真实浏览器、真实 API key 与招聘平台采集尚待逐项验证。
 贡献说明见 [CONTRIBUTING.md](CONTRIBUTING.md)。MIT 许可；第三方依赖和平台内容各自遵循其授权与使用条件。
