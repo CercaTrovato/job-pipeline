@@ -10,7 +10,9 @@
 | 网页完整流水线 | 已实现，Windows Edge 浏览器操作实测通过 |
 | 发布验证 | 三系统 Python 3.11–3.13 的 9 个 CI 组合通过，真实平台/API 接入仍待实测 |
 
-2026-10-07：用户已授权公开发布。公开仓库：https://github.com/CercaTrovato/job-pipeline 。初次提交 `8ecd957`，Windows 中文终端修复 `7492444`。创建 v0.1.0 预发布版本，下载入口：https://github.com/CercaTrovato/job-pipeline/releases/tag/v0.1.0 。Release 的实际发布状态以 GitHub 页面为准。
+2026-10-07：已公开发布。仓库：https://github.com/CercaTrovato/job-pipeline 。初次提交 `8ecd957`，Windows 中文终端修复 `7492444`。v0.1.0 预发布版本：https://github.com/CercaTrovato/job-pipeline/releases/tag/v0.1.0 。GitHub 已读回确认 draft=false、prerelease=true，发布于北京时间 2026-10-07 16:57:35；版本标签指向 `bd9446dddd4f4b5811ee2aeb442f63cb0fd41e6e`。
+
+发布附件：wheel、源码 tar.gz、checksums.json，均为 uploaded。GitHub 返回的附件 SHA-256 与本地一致；发行包从版本对应的已跟踪源码构建，未包含缓存、实库或认证文件。后续这份进度记录的文档提交不改动已发布标签及附件。
 跨系统实测及真实模型/来源状态在发布验证时逐项记录，不沿用原项目历史测试数。
 
 ## 本次证据
